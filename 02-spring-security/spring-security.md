@@ -7,6 +7,7 @@
 3) Dónde se ve en tu código: En todos los casos, la configuración de seguridad tiene el archivo `SecurityConfig.java`
 
    - Basic está configurado con `.httpBasic()` en el archivo `SecurityConfig.java`
+   - JWT tiene las anotaciones para las llaves públicas y privadas. Además, tiene funciones para codificar, decodificar y autenticar el Bearer token en `SecurityConfig.java`. Adicionalmente, tiene otro RestController llamado `AuthController.java`, dónde se expone el endpoint para recibir las credencias y responder con el token usando el método POST.
 
 4) Qué pasa si no lo usas: El no usar Spring Security afecta mucho la aplicación de Java. Por ejemplo, las contraseñas están en texto plano, lo cual hace que las credenciales de todos los usuarios queden comprometidas al tener una falla en la seguridad de la base de datos. Además, los endpoints de la aplicación quedan totalmente expuestos al público, lo cual hace que cualquier usuario pueda consumir , modifical o eliminar datos si conoce las rutas Rest, sin necesidad de autenticazación y autorización. Siguiente, no se tendría el bloqueo a la información con Bearer tokens caducados o alterados en el caso de JWT y Oauth2.0. Finalmente, el usuario tiene que crear y gestionar contraseñas locales para cada servicio sin la integración del protocolo Oauth2.0.
 
