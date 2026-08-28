@@ -15,13 +15,19 @@
 4) Cómo correrlo:
    
    - HTTP Basic:
-   `cd 17-seguridad-autenticacion/01-security-basic
-mvnw spring-boot:run`
+   ```bash 
+   cd 17-seguridad-autenticacion/01-security-basic
+   mvnw spring-boot:run
+   ```
 
    - JWT:
-   `cd 17-seguridad-autenticacion/02-security-jwt
-mvnw spring-boot:run`
+   ```bash
+   cd 17-seguridad-autenticacion/02-security-jwt
+   mvnw spring-boot:run
+   ```
 
    - OAuth2.0:
-   `cd 17-seguridad-autenticacion/03-security-oauth2
-mvnw spring-boot:run`
+   ```bash
+   cd 17-seguridad-autenticacion/03-security-oauth2
+   mvnw spring-boot:run
+   ```
