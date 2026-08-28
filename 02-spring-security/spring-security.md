@@ -1,4 +1,8 @@
 1) Qué es el concepto y qué problema resuelve, en tus palabras - Spring Security es un framework poderoso y flexible que se utiliza para proporcionar autenticación (quién eres) y autorización (qué puedes hacer/a qué tienes acceso) en aplicaciones desarrolladas en Java. En nuestra clase aprendimos sobre los diferentes métodos de acceso Basic, JWT y Oauth2.0 usando Spring Security. Los problemas que este framework resuelve son centralizar los métodos de acceso, previamente mencionados, sin duplicar la lógica de validación. Uno de los beneficios es el manejo seguro de credenciales, porque evita el almacenamiento de contraseña en texto plano al implementar algoritmos de hashing. Finalmente como el rest de Spring, centraliza la lógica para filtrar las peticiones HTTP antes de que alcancen los controladores, llamado en el código visto en clase @RestController.
+   - HTTP Basic: Comparte el usuario y contraseña codificados en Base64. Como vimos en clase, se utiliza para pruebas rápidas o en integración de microservicios internos.
+   - JWT (JSON Web Token): Se validan las credenciales del usuario y se devuelve un token firmado digitalmente que expira con el tiempo. Se utiliza un Bearer token. Como vimos en clase, es un mecanismo de autenticación stateless.
+   - OAuth2.0: Este protocolo está construido sobre JWT y, como mencionado en clase, se utiliza principalmente para proveedores. Este mecanismo delega la autorización, donde un proveedor de identidad autentica el usuario con sus respectivas credenciales. Esto es seguro para aplicaciones complejas y con muchas integraciones, debido a que el cliente recibe una autorización sin almacenar contraseñas del usuario.
+   
 2) Dónde se ve en tu código - 
 3) Qué pasa si no lo usas -
 4) Cómo correrlo -
