@@ -9,8 +9,8 @@
 
 4) Cómo correrlo -
 
- # 1. Compilar y levantar la aplicación Spring Boot
-mvn spring-boot:run
+ 1. Compilar y levantar la aplicación Spring Boot
+`mvn spring-boot:run`
 
-# 2. Probar login JWT y obtener el token (o hacer petición con HTTP Basic)
-curl -X POST http://localhost:8080/api/v1/auth/login -H "Content-Type: application/json" -d '{"username":"user","password":"password"}'  
+2. Probar login JWT y obtener el token (o hacer petición con HTTP Basic)
+`curl -X POST http://localhost:8080/api/v1/auth/login -H "Content-Type: application/json" -d '{"username":"user","password":"password"}'  `
