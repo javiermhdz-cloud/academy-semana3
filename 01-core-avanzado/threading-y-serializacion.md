@@ -3,9 +3,9 @@
   - Hilos: Permiten ejecutar múltiples tareas en paralelo aprovechando procesadores multinúcleo. `ExecutorService` evita la sobrecarga de instanciar hilos manualmente (uno por uno).
   - El problema de la concurrencia (¿Qué pasa cuándo dos hilos tocan el mismo dato y cómo lo resuelves?): Bloquea la aplicación durante operaciones pesadas de Entrada/Salida (I/O).
   - Archivos (Leer y escribir archivos): Proporciona la habilidad al programador de leer, escribir y manipular rutas en el sistema de archivos usando `java.nio.file.Files` o con `FileInputStream`/`FileOutputStream` (Streams). Para poder gestionar los recursos de forma segura, se utiliza `try-with-resources`. Como resultado, se garantiza que los descriptores de archivos (files descriptor) se cierren automáticamente sin fugas de memoria (memory leaks).
-  - Serialización (Guardar un objeto a disco y volverlo a leer): 
-  - ¿Por qué exoste el `serialVersionUID`?
-  - ¿Qué le pasa a un marcado `transient`?
+  - Serialización (Guardar un objeto a disco y volverlo a leer): En el código es llamado `Serializable`. Esto es un proceso para convertir el estado de un objeto Java a un flujo de bytes para almacenar en disco duro o transmitirlo por red. Posteriormente, se reconstruye en la memoria. Todo esto es posible con `ObjectInputStream` y `ObjectOutputStream`.
+  - ¿Por qué exoste el `serialVersionUID`?: Es un identificador de versión que garantiza la compatibilidad entre el objeto serializado en disco y la clase cargada en JVM. Si la clase sufre cambios en sus atributos, pero conserva el mismo identificador, Java permite deserializar el objeto. Asimismo, si la versión no coincide entre la escriture y la lectura, Java lanza la excepción `InvalidClassException`. Esto es usado por Java para verificar que el emisor (quien serializó el objeto) y el receptor (quien lo desearliza) carguen versiones de la clase que sean compatibles. Todo esto con la finalidad de evitar cargar un objeto con una estructura corrupta o incomptable en memoria.
+  - ¿Qué le pasa a un campo marcado `transient`?: Le indica a JVM que el campo debe omitirse durante la serialización. Cuando el objeto se deserializa, el campo va a tomar por defecto asignado a su tipo de dato: `null` - para objetos, `0` - para numéricos y `false` - para booleans. Se utiliza con la aplicación de ignorar datos importantes, como contraseñas, o campos que no requieren persistencia. 
   
 3) **Dónde se ve en tu código:**
 
