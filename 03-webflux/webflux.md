@@ -1,5 +1,9 @@
 1) **Qué es el concepto y qué problema resuelve, en tus palabras:** Es un framework asincrono y no bloqueante que puede procesar una gran cantidad de peticiones concurrentes con un numero reducido de hilos de sistema operativo.
 
+   - *Flujo (Reactive Stream):* Es una secuencia continua de datos o eventos emitidos a lo largo del tiempo de forma asincrona. Como aprendido en clase, un flujo reactivo procesa los datos a medida que van llegando o generandose. Un flujo puede tener tres tipos de señales:
+     - Dato (onNext): Emite el elemento producido.
+     - Error (onError): Notifica que ocurrio un fallo y detiene el flujo.
+     - Completado (onComplete): Notifica que ya no van a haber mas elementos y el flujo finalizo con exito.
    - *Mono vs. Flux:*
      - Mono<T>: Es un flujo reactivo asincrono que emite cero o un elemento. Es usado para busquedas por ID, actualizaciones y respuestas.
      - Flux<T>: Representa un flujo reactivo asincrono que emite cero o multiples elementos. Puede transmitir datos de forma continua en el tiempo, ideal para streaming de videos como Netlflix y Youtube.
@@ -10,37 +14,17 @@
     - Carga de trafico baja: Si la aplicacion *NO* maneja miles de peticiones concurrentes, por ejemplo *I/O*, el modelo declarativo reactivo suma complejidad innecesaria. 
 
   - Reactivo vs Bloqueante:
-    - Comportamiento en Version Bloqueante (Spring MVC/Tomcat):
-        - Cada peticion HTTP entrante consume un hilo del servidor de peticiones
-        - Si 1000 usuarios realizan peticiones simultaneas a un endpoint que tarda 5 segundos en responder, el servidor bloquea 100 hilos durante 5 segundos completos consumiento memoria. Al agotarse los hilos disponibles, las siguientes peticiones quedan en cola o fallan por timeout.
-    - Comportamiento en Version Reactiva (Spring WebFlux):
-     -
-
     
-3) **Dónde se ve en tu código:** En todos los casos, la configuración de seguridad tiene el archivo `SecurityConfig.java`
+    - Comportamiento en Version Bloqueante (Spring MVC/Tomcat):
+       - Cada peticion HTTP entrante consume un hilo del servidor de peticiones
+       - Situacion 100 peticiones: Si 1000 usuarios realizan peticiones simultaneas a un endpoint que tarda 5 segundos en responder, el servidor bloquea 100 hilos durante 5 segundos completos consumiento memoria. Al agotarse los hilos disponibles, las siguientes peticiones quedan en cola o fallan por timeout.
+          
+    - Comportamiento en Version Reactiva (Spring WebFlux):
+       - WebFlux procesa las peticiones mediante un `Event Loop` utilizando pocos hilos (generalmente 1 hilo por nucleo de CPU).
+       - Situacion 100 peticiones: En la misma situacion de 100 peticiones con un retraso de 5 segundos, el hilo registrz la tarea asincrona y queda inmediatamente libre para aceptar nuevas conexiones. Pasados los 5 segundos, una notificacion de evento avisa que el dato esta lista y el servidor da una respuesta sin haber pausado o retenido los hilos.
 
-   - Basic: está configurado con `.httpBasic()` en el archivo `SecurityConfig.java`
-   - JWT: tiene las anotaciones para las llaves públicas y privadas. Además, tiene funciones para codificar, decodificar y autenticar el Bearer token en `SecurityConfig.java`. Adicionalmente, tiene otro RestController llamado `AuthController.java`, dónde se expone el endpoint para recibir las credenciales y responder con el token usando el método POST.
-   - Oauth 2.0: tiene el código simplificado, porque Spring descarga la configuración para la dirección del JWKS y de ahí descarga la llave pública. Con esto, se evita escribir código sobre las llaves, encoder y decoder. Solamente se le tiene que indicar que los tokens son emitidos por otro servidor en el archivo `application.properties`. En nuestro proyecto visto en clase, usamos el servidor de Identity and Access Management (IAM) para hacer un Single Sign-On (SSO) Keycloak. De esta forma, Keycloak autentica el usuario y emite el JWT lo que da como resultado que la aplicación de Spring no gestiona registro de usuarios, contraseña y tokens.
+2) **Dónde se ve en tu código:** 
 
-4) **Qué pasa si no lo usas:** El no usar Spring Security afecta mucho la aplicación de Java. Por ejemplo, las contraseñas están en texto plano, lo cual hace que las credenciales de todos los usuarios queden comprometidas al tener una falla en la seguridad de la base de datos. Además, los endpoints de la aplicación quedan totalmente expuestos al público, lo cual hace que cualquier usuario pueda consumir , modificar o eliminar datos si conoce las rutas Rest, sin necesidad de autenticación y autorización. Siguiente, no se tendría el bloqueo (**HTTP 401 Unauthorized**) a la información con Bearer tokens faltantes, caducados o alterados en el caso de JWT y Oauth2.0. Esto crearía una vulnerabilidad, porque cualquier usuario puede hacer peticiones no autorizadas. Finalmente, el usuario tiene que crear y gestionar contraseñas locales para cada servicio sin la integración del protocolo Oauth2.0.
+3) **Qué pasa si no lo usas:** En esta situacion, ocurriria algo llamado `Thread Starvation`, Agotamiento de Hilos. Al tener una arquitectura de microservicios con alta latencia de red u operaciones I/O intensas, el servidor Tomcat agota su cantidad de hilos disponibles lo cual resulta en un aumento en el tiempo de respuesta. Asimismo, se consumo una mayor cantidad de recursos, porque para mantener miles de hilos activos en el sistema operativo se necesita memoria RAM y CPU.
 
 5) **Cómo correrlo:**
-   
-   - HTTP Basic:
-   ```bash 
-   cd 17-seguridad-autenticacion/01-security-basic
-   mvnw spring-boot:run
-   ```
-
-   - JWT:
-   ```bash
-   cd 17-seguridad-autenticacion/02-security-jwt
-   mvnw spring-boot:run
-   ```
-
-   - OAuth2.0:
-   ```bash
-   cd 17-seguridad-autenticacion/03-security-oauth2
-   mvnw spring-boot:run
-   ```
