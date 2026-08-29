@@ -1,0 +1,5 @@
+com\academymty\webflux\flux\rest\LecturaRestController.class
+com\academymty\webflux\flux\rest\LecturaRestController$Resumen.class
+com\academymty\webflux\flux\model\Lectura.class
+com\academymty\webflux\flux\service\SensorService.class
+com\academymty\webflux\flux\WebfluxFluxApplication.class
