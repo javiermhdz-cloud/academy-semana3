@@ -20,7 +20,7 @@
           - Situacion 100 peticiones: Si 1000 usuarios realizan peticiones simultaneas a un endpoint que tarda 5 segundos en responder, el servidor bloquea 100 hilos durante 5 segundos completos consumiento memoria. Al agotarse los hilos disponibles, las siguientes peticiones quedan en cola o fallan por timeout.
           
        - Comportamiento en Version Reactiva (Spring WebFlux):
-          - WebFlux procesa las peticiones mediante un `Event Loop` utilizando pocos hilos (generalmente 1 hilo por nucleo de CPU).
+          - WebFlux procesa las peticiones mediante un Event Loop utilizando pocos hilos (generalmente 1 hilo por nucleo de CPU).
           - Situacion 100 peticiones: En la misma situacion de 100 peticiones con un retraso de 5 segundos, el hilo registrz la tarea asincrona y queda inmediatamente libre para aceptar nuevas conexiones. Pasados los 5 segundos, una notificacion de evento avisa que el dato esta lista y el servidor da una respuesta sin haber pausado o retenido los hilos.
 
 2) *Dónde se ve en tu código:*
