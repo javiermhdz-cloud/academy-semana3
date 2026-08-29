@@ -23,8 +23,18 @@
           - WebFlux procesa las peticiones mediante un `Event Loop` utilizando pocos hilos (generalmente 1 hilo por nucleo de CPU).
           - Situacion 100 peticiones: En la misma situacion de 100 peticiones con un retraso de 5 segundos, el hilo registrz la tarea asincrona y queda inmediatamente libre para aceptar nuevas conexiones. Pasados los 5 segundos, una notificacion de evento avisa que el dato esta lista y el servidor da una respuesta sin haber pausado o retenido los hilos.
 
-2) **Dónde se ve en tu código:** 
+2) **Dónde se ve en tu código:*
 
+   - *Mono:*
+      - Simulacion de Latencia No Bloqueante e Inmutabilidad: `EmployeeRepository.java` y `Employee.java`
+      - Endpoints Reactivos con `Mono<T>`: `EmployeeRestController.java`
+      - Evidencia del Event Loop: `HiloRestController.java`
+      - Demostracion de la Propiedad `Lazy`/Evaluaciones en Pruebas: `EmployeeRepositoryTest.java`
+
+   - *Flux:*
+      - Emision Asincrona Infinito/Stream Continuo: `SensorService.java`
+      - Operadores Reactivos del Flujo: `LecturaRestController.java`
+ 
 3) **Qué pasa si no lo usas:** En esta situacion, ocurriria algo llamado `Thread Starvation`, Agotamiento de Hilos. Al tener una arquitectura de microservicios con alta latencia de red u operaciones I/O intensas, el servidor Tomcat agota su cantidad de hilos disponibles lo cual resulta en un aumento en el tiempo de respuesta. Asimismo, se consumo una mayor cantidad de recursos, porque para mantener miles de hilos activos en el sistema operativo se necesita memoria RAM y CPU.
 
-5) **Cómo correrlo:**
+4) **Cómo correrlo:**
