@@ -9,10 +9,14 @@
     - Operaciones bloqueantes no migradas: Si la aplicacion consulta bases de datos tradicionales o usa librerias sincronas, el hilo de WebFlux se bloquea de todas formas, perdiendo todo el beneficio.
     - Carga de trafico baja: Si la aplicacion *NO* maneja miles de peticiones concurrentes, por ejemplo *I/O*, el modelo declarativo reactivo suma complejidad innecesaria. 
 
-  - Reactivo vs Bloqueate:
-    - Comportamiento en Version Bloqueante:
-    - 
-    - 
+  - Reactivo vs Bloqueante:
+    - Comportamiento en Version Bloqueante (Spring MVC/Tomcat):
+        - Cada peticion HTTP entrante consume un hilo del servidor de peticiones
+        - Si 1000 usuarios realizan peticiones simultaneas a un endpoint que tarda 5 segundos en responder, el servidor bloquea 100 hilos durante 5 segundos completos consumiento memoria. Al agotarse los hilos disponibles, las siguientes peticiones quedan en cola o fallan por timeout.
+    - Comportamiento en Version Reactiva (Spring WebFlux):
+     -
+
+    
 3) **Dónde se ve en tu código:** En todos los casos, la configuración de seguridad tiene el archivo `SecurityConfig.java`
 
    - Basic: está configurado con `.httpBasic()` en el archivo `SecurityConfig.java`
