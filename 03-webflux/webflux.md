@@ -23,7 +23,7 @@
           - WebFlux procesa las peticiones mediante un Event Loop utilizando pocos hilos (generalmente 1 hilo por nucleo de CPU).
           - Situacion 100 peticiones: En la misma situacion de 100 peticiones con un retraso de 5 segundos, el hilo registrz la tarea asincrona y queda inmediatamente libre para aceptar nuevas conexiones. Pasados los 5 segundos, una notificacion de evento avisa que el dato esta lista y el servidor da una respuesta sin haber pausado o retenido los hilos.
 
-2) *Dónde se ve en tu código:*
+2) **Dónde se ve en tu código:**
 
    - *Mono:*
       - Simulacion de Latencia No Bloqueante e Inmutabilidad: `EmployeeRepository.java` y `Employee.java`
