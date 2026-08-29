@@ -11,33 +11,16 @@
       - `@InjectMocks`: create la instancia real de la clase que se va a probar y automaticamente inyecta esos mocks en la clase.
       - `when(...).thenReturn(...)`: es usado para configurar un objeto Mock para regresar un value especifico cuando un metodo especifico es llamado.
       - `verify(...)`: es usado para checar si un metodo en especifico fue llamado en un objeto Mock con argumentos exactos. Asimismo, confirma que la clase interactuo con sus colaboradores el numero de veces esperado.
+    
+      - Qué colaborador SÍ mockear: como mencionado en clase, se debe de implementar Mockito en los colaboradores que realicen mucho I/O, conexiones a red, llamadas a API externas constantes y a busques en bases de datos. Mockito soluciona las pruebas lentas, impredecibles y dependientes del entorno de desarrollo.
+      - Qué colaborador NO mockear: Tengo entendido que Mockear objetos de datos le quita realismo a las pruebas y no agrega beneficios; por ende, no se debe de implementar en entidades, clases sin estado y Objetos de Transferencia de Datos `DTOs`.
 
 2) *Dónde se ve en tu código:*
 
-   - *Mono:*
-      - Simulacion de Latencia No Bloqueante e Inmutabilidad: `EmployeeRepository.java` y `Employee.java`
-      - Endpoints Reactivos con `Mono<T>`: `EmployeeRestController.java`
-      - Evidencia del Event Loop: `HiloRestController.java`
-      - Demostracion de la Propiedad `Lazy`/Evaluaciones en Pruebas: `EmployeeRepositoryTest.java`
-
-   - *Flux:*
-      - Emision Asincrona Infinito/Stream Continuo: `SensorService.java`
-      - Operadores Reactivos del Flujo: `LecturaRestController.java`
  
-3) **Qué pasa si no lo usas:** En esta situacion, ocurriria algo llamado `Thread Starvation`, Agotamiento de Hilos. Al tener una arquitectura de microservicios con alta latencia de red u operaciones I/O intensas, el servidor Tomcat agota su cantidad de hilos disponibles lo cual resulta en un aumento en el tiempo de respuesta. Asimismo, se consumo una mayor cantidad de recursos, porque para mantener miles de hilos activos en el sistema operativo se necesita memoria RAM y CPU.
+3) **Qué pasa si no lo usas:** 
 
 4) **Cómo correrlo:**
 
-   - Mono:
-   ```bash
-   cd 01-webflux-mono
-   mvnw.cmd clean spring-boot:run
-   ```
-
-   - Flux:
-   ```bash
-   cd 02-webflux-flux
-   mvnw.cmd clean spring-boot:run
-   ```
 
    
