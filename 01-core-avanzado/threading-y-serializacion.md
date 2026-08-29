@@ -9,7 +9,7 @@
   
 2) **Dónde se ve en tu código:** El código compartido es de Miguel: https://github.com/cursosmrugerio/cursoJava17_21/tree/main/chapter14
   - *Serialización:*
-    - `Chimpanzee.java` implementa `Serializable` y marca atributos como `transient`.
+    - `Chimpanzee.java` implementa la interface `Serializable` y marca atributos como `transient`.
     - `PrincipalObjectOutput.java` serializa una lista de objetos `Chimpanzee` y los guarda en disco con el nombre `data/chimpanzees.data` con `ObjectOutputStream`, `BufferedOutputStream` y `FileOutputStream`.
     - `PrincipalObjectInput.java` deserializa y recupera los objetos. Maneja el fin del archivo con la excepción `EOFException`.
   - *Archivos con Java NIO (`Path` y `Files`):*
@@ -21,6 +21,11 @@
   - Sin Concurrencia (Threading): Las operaciones occuren secuencialmente de forma síncrona, bloqueando el hilo principal durante lectureas o escrituras en disco. Esto haría el código extremadamente lento.
   - Sin Manejo de Concurrencia (Race Conditions): Cuando múltiples hilos intentan escribir o actualizar la misma variable, se produce como resultado inconsistencias por accesos simultáneos y pérdida de datos.
   - Sin Try-with-resources: Los streams de los archivos quedarían abiertos en el sistema operativo, causando fugas de memoria (`memory leaks`) o bloquea los archivos impidiendo su modificación por otros procesos.
-  - Sin Serialización: Si no se imp
+  - Sin Serialización: Si no se implementa la interface `Serializable` se tiene que escribir manualmente los parsers para poder leer y escribir los objetos a texto plano. Esto genera código innecesario y riesgo de errores al hacer el `parsing` y `casting` de los objetos.
 
 4) **Cómo correrlo:**
+
+  ```bash
+  cd 01-core-avanzado
+  mvnw clean compile exec:java
+  ```
