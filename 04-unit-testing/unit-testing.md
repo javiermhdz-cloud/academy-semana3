@@ -31,5 +31,14 @@
 
 4) **Cómo correrlo:**
 
-
-   
+   - JUnit:
+      ```bash
+      cd 02-junit-catalogo
+      mvnw test
+      ```
+      
+   - Mockito:
+      ```bash
+      cd 04-mockito-dobles
+      mvnw test
+      ```
