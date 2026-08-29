@@ -38,3 +38,17 @@
 3) **Qué pasa si no lo usas:** En esta situacion, ocurriria algo llamado `Thread Starvation`, Agotamiento de Hilos. Al tener una arquitectura de microservicios con alta latencia de red u operaciones I/O intensas, el servidor Tomcat agota su cantidad de hilos disponibles lo cual resulta en un aumento en el tiempo de respuesta. Asimismo, se consumo una mayor cantidad de recursos, porque para mantener miles de hilos activos en el sistema operativo se necesita memoria RAM y CPU.
 
 4) **Cómo correrlo:**
+
+   - Mono:
+   ```bash
+   cd 01-webflux-mono
+   mvnw.cmd clean spring-boot:run
+   ```
+
+   - Flux:
+   ```bash
+   cd 02-webflux-flux
+   mvnw.cmd clean spring-boot:run
+   ```
+
+   
