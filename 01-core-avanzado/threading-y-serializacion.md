@@ -15,7 +15,12 @@
   - Archivos con Java NIO (`Path` y `Files`):
     - `PrincipalPath01.java` lee y escribe archivos utilizando la API moderna `java.nio.file.Files`.
     - `PathExample.java` y `Principal2.java` construyen y manipulan rutas del sistema operativo.
+  - Threading (Concurrencia): En este código no hay hilos ni problemas de concurrencia. Como hemos visto en clase, la ejecución en paralelo y asíncrona de hilos se puede manejar con un `Thread`, `Runnable` o `ExecutorService` para coordinar tareas concurrentes antes o durante la persistencia de datos. Para evitar las previamente mencionadas condiciones de carrera, al modificar variables compartidas entre hilos, se implemente con bloques `synchronized` o `AtomicInteger`.
 
-3) **Qué pasa si no lo usas:** 
+3) **Qué pasa si no lo usas:**
+  - Sin Concurrencia (Threading):
+  - Sin Manejo de Concurrencia (Race Conditions):
+  - Sin Try-with-resources:
+  - Sin Serialización: 
 
 4) **Cómo correrlo:**
