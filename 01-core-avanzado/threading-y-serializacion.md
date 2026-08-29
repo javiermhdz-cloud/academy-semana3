@@ -27,5 +27,7 @@
 
   ```bash
   cd 01-core-avanzado
-  mvnw clean compile exec:java
+  javac -d bin -sourcepath src src/com/serializable/v1/*.java
+  java -cp bin com.serializable.v1.PrincipalObjectOutput
+  java -cp bin com.serializable.v1.PrincipalObjectInput
   ```
