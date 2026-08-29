@@ -1,27 +1,16 @@
-1) **Qué es el concepto y qué problema resuelve, en tus palabras:** Es un framework asincrono y no bloqueante que puede procesar una gran cantidad de peticiones concurrentes con un numero reducido de hilos de sistema operativo.
+1) **Qué es el concepto y qué problema resuelve, en tus palabras:** 
 
-   - *Flujo (Reactive Stream):* Es una secuencia continua de datos o eventos emitidos a lo largo del tiempo de forma asincrona. Como aprendido en clase, un flujo reactivo procesa los datos a medida que van llegando o generandose. Un flujo puede tener tres tipos de señales:
-     - Dato (onNext): Emite el elemento producido.
-     - Error (onError): Notifica que ocurrio un fallo y detiene el flujo.
-     - Completado (onComplete): Notifica que ya no van a haber mas elementos y el flujo finalizo con exito.
-   - *Mono vs. Flux:*
-     - Mono<T>: Es un flujo reactivo asincrono que emite cero o un elemento. Es usado para busquedas por ID, actualizaciones y respuestas.
-     - Flux<T>: Representa un flujo reactivo asincrono que emite cero o multiples elementos. Puede transmitir datos de forma continua en el tiempo, ideal para streaming de videos como Netlflix y Youtube.
+   - Unit Testing: Es la metodologia de verificar el comportamiento de una unidad pequeña de codigo de forma aislada, usualmente un metodo o clase. Esto con la finalidad de detectar errores en las fases tempranas del desarrollo de una aplicacion.
+     
+   - JUnit:
+      - Ciclo de Vida (`@BeforeEach`): Esta anotacion permite inicializar el estado del objeto o sus dependencia antes de cada prueba. Asi como esta anotacion, existen diferentes anotaciones que ayudan a ejecutar las pruebas unitarias de forma independiente. Se puede limpiar la memoria o establecer parametros antes o despues de cada prueba.
+      - Aserciones (`assertThrows`): Permite validar el error esperado. De esta forma, se comprueba que el codigo lance la excepcion esperada con inputs invalidos o errores de usuario.
 
-   - Flujo Lazy: En este caso, nada ocurre en el codigo hasta que alguien se suscribe. La ejecucion real de la tarea o consulta a base de datos se dispara cuando la peticion HTTP de un cliente web solicita los datos.
-     - Cuando *NO* vale la pena WebFlux:
-       - Operaciones bloqueantes no migradas: Si la aplicacion consulta bases de datos tradicionales o usa librerias sincronas, el hilo de WebFlux se bloquea de todas formas, perdiendo todo el beneficio.
-       - Carga de trafico baja: Si la aplicacion *NO* maneja miles de peticiones concurrentes, por ejemplo *I/O*, el modelo declarativo reactivo suma complejidad innecesaria. 
-
-     - Reactivo vs Bloqueante:
-    
-       - Comportamiento en Version Bloqueante (Spring MVC/Tomcat):
-          - Cada peticion HTTP entrante consume un hilo del servidor de peticiones
-          - Situacion 100 peticiones: Si 1000 usuarios realizan peticiones simultaneas a un endpoint que tarda 5 segundos en responder, el servidor bloquea 100 hilos durante 5 segundos completos consumiento memoria. Al agotarse los hilos disponibles, las siguientes peticiones quedan en cola o fallan por timeout.
-          
-       - Comportamiento en Version Reactiva (Spring WebFlux):
-          - WebFlux procesa las peticiones mediante un Event Loop utilizando pocos hilos (generalmente 1 hilo por nucleo de CPU).
-          - Situacion 100 peticiones: En la misma situacion de 100 peticiones con un retraso de 5 segundos, el hilo registrz la tarea asincrona y queda inmediatamente libre para aceptar nuevas conexiones. Pasados los 5 segundos, una notificacion de evento avisa que el dato esta lista y el servidor da una respuesta sin haber pausado o retenido los hilos.
+   - Mockito:
+      - `@Mockito`: crea una instancia falsa de la dependencia.
+      - `@InjectMocks`: create la instancia real de la clase que se va a probar y automaticamente inyecta esos mocks en la clase.
+      - `when(...).thenReturn(...)`: es usado para configurar un objeto Mock para regresar un value especifico cuando un metodo especifico es llamado.
+      - `verify(...)`: es usado para checar si un metodo en especifico fue llamado en un objeto Mock con argumentos exactos. Asimismo, confirma que la clase interactuo con sus colaboradores el numero de veces esperado.
 
 2) *Dónde se ve en tu código:*
 
