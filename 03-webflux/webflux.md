@@ -8,10 +8,10 @@
      - Mono<T>: Es un flujo reactivo asincrono que emite cero o un elemento. Es usado para busquedas por ID, actualizaciones y respuestas.
      - Flux<T>: Representa un flujo reactivo asincrono que emite cero o multiples elementos. Puede transmitir datos de forma continua en el tiempo, ideal para streaming de videos como Netlflix y Youtube.
 
-  - Flujo Lazy: En este caso, nada ocurre en el codigo hasta que alguien se suscribe. La ejecucion real de la tarea o consulta a base de datos se dispara cuando la peticion HTTP de un cliente web solicita los datos.
-  - Cuando *NO* vale la pena WebFlux:
-    - Operaciones bloqueantes no migradas: Si la aplicacion consulta bases de datos tradicionales o usa librerias sincronas, el hilo de WebFlux se bloquea de todas formas, perdiendo todo el beneficio.
-    - Carga de trafico baja: Si la aplicacion *NO* maneja miles de peticiones concurrentes, por ejemplo *I/O*, el modelo declarativo reactivo suma complejidad innecesaria. 
+   - Flujo Lazy: En este caso, nada ocurre en el codigo hasta que alguien se suscribe. La ejecucion real de la tarea o consulta a base de datos se dispara cuando la peticion HTTP de un cliente web solicita los datos.
+     - Cuando *NO* vale la pena WebFlux:
+       - Operaciones bloqueantes no migradas: Si la aplicacion consulta bases de datos tradicionales o usa librerias sincronas, el hilo de WebFlux se bloquea de todas formas, perdiendo todo el beneficio.
+       - Carga de trafico baja: Si la aplicacion *NO* maneja miles de peticiones concurrentes, por ejemplo *I/O*, el modelo declarativo reactivo suma complejidad innecesaria. 
 
   - Reactivo vs Bloqueante:
     
