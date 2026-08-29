@@ -18,9 +18,9 @@
   - Threading (Concurrencia): En este código no hay hilos ni problemas de concurrencia. Como hemos visto en clase, la ejecución en paralelo y asíncrona de hilos se puede manejar con un `Thread`, `Runnable` o `ExecutorService` para coordinar tareas concurrentes antes o durante la persistencia de datos. Para evitar las previamente mencionadas condiciones de carrera, al modificar variables compartidas entre hilos, se implemente con bloques `synchronized` o `AtomicInteger`.
 
 3) **Qué pasa si no lo usas:**
-  - Sin Concurrencia (Threading):
-  - Sin Manejo de Concurrencia (Race Conditions):
-  - Sin Try-with-resources:
+  - Sin Concurrencia (Threading): Las operaciones occuren secuencialmente de forma síncrona, bloqueando el hilo principal durante lectureas o escrituras en disco. Esto haría el código extremadamente lento.
+  - Sin Manejo de Concurrencia (Race Conditions): Cuando múltiples hilos intentan escribir o actualizar la misma variable, se produce como resultado inconsistencias por accesos simultáneos y pérdida de datos.
+  - Sin Try-with-resources: Los streams de los archivos quedarían abiertos en el sistema operativo, causando fugas de memoria (`memory leaks`) o bloquea los archivos impidiendo su modificación por otros procesos.
   - Sin Serialización: 
 
 4) **Cómo correrlo:**
