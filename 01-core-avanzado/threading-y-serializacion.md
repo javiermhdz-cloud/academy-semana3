@@ -8,19 +8,19 @@
   - ¿Qué le pasa a un campo marcado `transient`?: Le indica a JVM que el campo debe omitirse durante la serialización. Cuando el objeto se deserializa, el campo va a tomar por defecto asignado a su tipo de dato: `null` - para objetos, `0` - para numéricos y `false` - para booleans. Se utiliza con la aplicación de ignorar datos importantes, como contraseñas, o campos que no requieren persistencia. 
   
 2) **Dónde se ve en tu código:** El código compartido es de Miguel: https://github.com/cursosmrugerio/cursoJava17_21/tree/main/chapter14
-  - Serialización:
+  - *Serialización:*
     - `Chimpanzee.java` implementa `Serializable` y marca atributos como `transient`.
     - `PrincipalObjectOutput.java` serializa una lista de objetos `Chimpanzee` y los guarda en disco con el nombre `data/chimpanzees.data` con `ObjectOutputStream`, `BufferedOutputStream` y `FileOutputStream`.
     - `PrincipalObjectInput.java` deserializa y recupera los objetos. Maneja el fin del archivo con la excepción `EOFException`.
-  - Archivos con Java NIO (`Path` y `Files`):
+  - *Archivos con Java NIO (`Path` y `Files`):*
     - `PrincipalPath01.java` lee y escribe archivos utilizando la API moderna `java.nio.file.Files`.
     - `PathExample.java` y `Principal2.java` construyen y manipulan rutas del sistema operativo.
-  - Threading (Concurrencia): En este código no hay hilos ni problemas de concurrencia. Como hemos visto en clase, la ejecución en paralelo y asíncrona de hilos se puede manejar con un `Thread`, `Runnable` o `ExecutorService` para coordinar tareas concurrentes antes o durante la persistencia de datos. Para evitar las previamente mencionadas condiciones de carrera, al modificar variables compartidas entre hilos, se implemente con bloques `synchronized` o `AtomicInteger`.
+  - *Threading (Concurrencia):* En este código no hay hilos ni problemas de concurrencia. Como hemos visto en clase, la ejecución en paralelo y asíncrona de hilos se puede manejar con un `Thread`, `Runnable` o `ExecutorService` para coordinar tareas concurrentes antes o durante la persistencia de datos. Para evitar las previamente mencionadas condiciones de carrera, al modificar variables compartidas entre hilos, se implemente con bloques `synchronized` o `AtomicInteger`.
 
 3) **Qué pasa si no lo usas:**
   - Sin Concurrencia (Threading): Las operaciones occuren secuencialmente de forma síncrona, bloqueando el hilo principal durante lectureas o escrituras en disco. Esto haría el código extremadamente lento.
   - Sin Manejo de Concurrencia (Race Conditions): Cuando múltiples hilos intentan escribir o actualizar la misma variable, se produce como resultado inconsistencias por accesos simultáneos y pérdida de datos.
   - Sin Try-with-resources: Los streams de los archivos quedarían abiertos en el sistema operativo, causando fugas de memoria (`memory leaks`) o bloquea los archivos impidiendo su modificación por otros procesos.
-  - Sin Serialización: 
+  - Sin Serialización: Si no se imp
 
 4) **Cómo correrlo:**
