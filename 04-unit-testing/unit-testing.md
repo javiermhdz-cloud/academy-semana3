@@ -15,10 +15,10 @@
       - Qué colaborador SÍ mockear: como mencionado en clase, se debe de implementar Mockito en los colaboradores que realicen mucho I/O, conexiones a red, llamadas a API externas constantes y a busques en bases de datos. Mockito soluciona las pruebas lentas, impredecibles y dependientes del entorno de desarrollo.
       - Qué colaborador NO mockear: Tengo entendido que Mockear objetos de datos le quita realismo a las pruebas y no agrega beneficios; por ende, no se debe de implementar en entidades, clases sin estado y Objetos de Transferencia de Datos `DTOs`.
 
-2) *Dónde se ve en tu código:*
+2) **Dónde se ve en tu código:**
 
  
-3) **Qué pasa si no lo usas:** 
+3) **Qué pasa si no lo usas:** Al no utilizar Mockito, se complica mucho probar la logica de negocio, porque se necesitaria una conexion a una base de datos reales. Esto puede ocasionar en fallas en las pruebas por fallos por comunicacion en la infrastructura de red o bases de datos. Ademas, cualquier implementacion de una nueva prueba automatizada o refactorizacion de codigo puede causar errores en funcionalidades (features) ya existentes al implementar pruebas unitarias sin JUnit y Mockito. Por eso es importante implementar JUnit y Mockito junto con pruebas de regresion.
 
 4) **Cómo correrlo:**
 
