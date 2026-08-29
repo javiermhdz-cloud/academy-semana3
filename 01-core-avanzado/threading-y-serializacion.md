@@ -9,9 +9,12 @@
   
 2) **Dónde se ve en tu código:** El código compartido es de Miguel: https://github.com/cursosmrugerio/cursoJava17_21/tree/main/chapter14
   - Serialización:
-    - Chimpanzee.java implementa `Serializable` y marca atributos como `transient`.
-    - PrincipalObjectOutput.java serializa una lista de objetos `Chimpanzee` y los guarda en disco con el nombre `data/chimpanzees.data` con `ObjectOutputStream`, `BufferedOutputStream` y `FileOutputStream`.
-    - PrincipalObjectInput.java deserializa y recupera los objetos. Maneja el fin del archivo con la excepción `EOFException`.
+    - `Chimpanzee.java` implementa `Serializable` y marca atributos como `transient`.
+    - `PrincipalObjectOutput.java` serializa una lista de objetos `Chimpanzee` y los guarda en disco con el nombre `data/chimpanzees.data` con `ObjectOutputStream`, `BufferedOutputStream` y `FileOutputStream`.
+    - `PrincipalObjectInput.java` deserializa y recupera los objetos. Maneja el fin del archivo con la excepción `EOFException`.
+  - Archivos con Java NIO (`Path` y `Files`):
+    - `PrincipalPath01.java` lee y escribe archivos utilizando la API moderna `java.nio.file.Files`.
+    - `PathExample.java` y `Principal2.java` construyen y manipulan rutas del sistema operativo.
 
 3) **Qué pasa si no lo usas:** 
 
