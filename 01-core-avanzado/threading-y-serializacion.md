@@ -7,8 +7,12 @@
   - ¿Por qué exoste el `serialVersionUID`?: Es un identificador de versión que garantiza la compatibilidad entre el objeto serializado en disco y la clase cargada en JVM. Si la clase sufre cambios en sus atributos, pero conserva el mismo identificador, Java permite deserializar el objeto. Asimismo, si la versión no coincide entre la escriture y la lectura, Java lanza la excepción `InvalidClassException`. Esto es usado por Java para verificar que el emisor (quien serializó el objeto) y el receptor (quien lo desearliza) carguen versiones de la clase que sean compatibles. Todo esto con la finalidad de evitar cargar un objeto con una estructura corrupta o incomptable en memoria. Basicamente, existe para proteger tu programa para leer datos incompatibles. De esta forma, se evita que el programa cargue a la memoria un objeto guardado en el pasado usando unado una versión de una clase del presente que ya no coincide en su estructura.
   - ¿Qué le pasa a un campo marcado `transient`?: Le indica a JVM que el campo debe omitirse durante la serialización. Cuando el objeto se deserializa, el campo va a tomar por defecto asignado a su tipo de dato: `null` - para objetos, `0` - para numéricos y `false` - para booleans. Se utiliza con la aplicación de ignorar datos importantes, como contraseñas, o campos que no requieren persistencia. 
   
-3) **Dónde se ve en tu código:**
+2) **Dónde se ve en tu código:** El código compartido es de Miguel: https://github.com/cursosmrugerio/cursoJava17_21/tree/main/chapter14
+  - Serialización:
+    - Chimpanzee.java implementa `Serializable` y marca atributos como `transient`.
+    - PrincipalObjectOutput.java serializa una lista de objetos `Chimpanzee` y los guarda en disco con el nombre `data/chimpanzees.data` con `ObjectOutputStream`, `BufferedOutputStream` y `FileOutputStream`.
+    - PrincipalObjectInput.java deserializa y recupera los objetos. Maneja el fin del archivo con la excepción `EOFException`.
 
-4) **Qué pasa si no lo usas:** 
+3) **Qué pasa si no lo usas:** 
 
-5) **Cómo correrlo:**
+4) **Cómo correrlo:**
